@@ -40,7 +40,7 @@ async function user(req, res, next) {
 
   //    b. If the passwords do not match return “INVALID”
 
-  const authenticated = bcrypt.compareSync(data.password, user.password_hash);
+  const authenticated = bcrypt.compareSync(user.password, usernameExists.password);
 
   if (!authenticated) {
     payload.error.code = 'INVALID';

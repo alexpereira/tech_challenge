@@ -1,11 +1,11 @@
 
-exports.up = function(knex, Promise) {
+module.exports.up = async db => {
   await db.schema.createTable('users', table => {
-  table.string('username');
-  table.string('password');
-});
+    table.string('username');
+    table.string('password');
+  });
 };
 
-exports.down = function(knex, Promise) {
+module.exports.down = async db => {
   await db.schema.dropTableIfExists('users');
 };

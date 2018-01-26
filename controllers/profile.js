@@ -20,7 +20,16 @@ async function user(req, res, next) {
   };
 
   // 2. Verify that the JWT is valid.
-  const userVerified = jwt.verify(user.token, 'flame');
+  let userVerified;
+
+  try {
+   userVerified = jwt.verify(user.token, 'flame');
+  } catch (err) {
+    if (err instanceof jwt.JsonWebTokenError) {
+      payload.error.code = 'INVALID';
+      res.status(400).json(payload);
+    }
+  }
 
   // 3. Verify that the username stored in the JWT is “joe”
 
